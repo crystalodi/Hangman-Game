@@ -1,5 +1,5 @@
 //Define dictionary array
-var wordArray = ["Shinigami", "Misa Amane", "Light Yagami", "Apples", 
+var dictionary = ["Shinigami", "Misa Amane", "Light Yagami", "Apples", 
 "Death Note", "Matsuda", "Near", "Mello", "Rem", "Gellus", "Ryuk", "Kira", "Watari"];
 var gameStarted = false; 
 //Define varibles for counting number of wins and number of losses
@@ -7,7 +7,7 @@ var winCount = 0;
 var lossCount = 0;
 var guessedLetters, selectedWord, allottedNumberOfGuesses;
 function chooseWord() {
-	selectedWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+	selectedWord = dictionary[Math.floor(Math.random() * dictionary.length)];
 	console.log("Selected Word: " + selectedWord);
 }
 function generateWordSpaces() {
@@ -55,18 +55,21 @@ document.onkeyup = function(event) {
 		gameStarted = true;
 		startGame();
 	}
-	if(isLetter(event.key) && guessedLetters.indexOf(event.key) === -1) {
-		var letterArray = checkLetter(event.key);
-		if(letterArray.length > 0) {
-			
-		}
-		else {
-			allottedNumberOfGuesses--;
-			if(allottedNumberOfGuesses === 0) {
-				//start a new game
-				startGame();
-				//increment loss counter
-				lossCount++;
+	
+	if(isLetter(event.key)) {
+		if(guessedLetters.indexOf(event.key) === -1) {
+			var letterArray = checkLetter(event.key);
+			if(letterArray.length > 0) {
+				
+			}
+			else {
+				allottedNumberOfGuesses--;
+				if(allottedNumberOfGuesses === 0) {
+					//start a new game
+					startGame();
+					//increment loss counter
+					lossCount++;
+				}
 			}
 		}
 	}
