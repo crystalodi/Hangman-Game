@@ -1,14 +1,10 @@
 //Define dictionary array
 var wordArray = ["Shinigami", "Misa Amane", "Light Yagami", "Apples", 
 "Death Note", "Matsuda", "Near", "Mello", "Rem", "Gellus", "Ryuk", "Kira", "Watari"];
-//Define empty guessed letters array;
-var guessedLetters = [];
-//Define selectedWord variable
-var selectedWord = "";
-//Define number of guesses variable and set it to 15
-var allotedNumberOfGuesses = 15;
-//Define boolean variable that determines if game has started
 var gameStarted = false; 
+//Define varibles for counting number of wins and number of losses
+var winCount = 0;
+var lossCount = 0;
 function chooseWord() {
 	selectedWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 	console.log("Selected Word: " + selectedWord);
@@ -16,30 +12,67 @@ function chooseWord() {
 function generateWordSpaces() {
 	
 }
+function populateLetter(letterArray) {
+
+}
 function startGame() {
-	//Clear out guessed letters array
-	guessedLetters = [];
-	//Clear variable that keeps track of how many guesses user has made
+	//Reinitialized guessed letters array if it has something in it.
+	if(guessedLetters.length > 0) {
+		guessedLetters = [];
+	}
+	//Empty selectedWord variable
+	selectedWord = "";
+	//reset variable that keeps track of how many guesses user has made to 15
 	allotedNumberOfGuesses = 15;
 	//Grab Another word from array
 	chooseWord();
+	//Generate Spaces for word
+	generateWordSpaces()
 }
 function checkLetter(letterGuessed) {
 	//Define empty array that will populate indexes where letter typed is found in word
-	chooseWord()
 	var foundIndexArray = [];
-	//Strip out any non-alpha numeric characters (like spaces or special characters)
-	var sanitizedSelectedWord = selectedWord.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+	//Strip out any non-alpha numeric characters
+	var sanitizedSelectedWord = selectedWord.toLowerCase().replace(/[^a-zA-Z]/g, "");
 	for(var index = 0; index < sanitizedSelectedWord.length; index++) {
 		if(letterGuessed.toLowerCase() === sanitizedSelectedWord[index]) {
-			foundIndexArray.pushed(index);
+			foundIndexArray.push(index);
 		}
 	}
-	guessedLetters.push(letterGuessed);
-	console.log(guessedLetters)
+	if(guessedLetters.indexOf(letterGuessed) === -1) {
+		guessedLetters.push(letterGuessed);
+	}
+	console.log(guessedLetters);
+	console.log(foundIndexArray);
 	return foundIndexArray;
 }
-//If user presses any key THEN
+function isLetter(letter) {
+	var code = letter.charCodeAt(0)
+	return (code >= 65 && code <= 90) || (code >= 97 && code <= 122)	
+}
+document.onkeyup = function(event) {
+	//If user presses any key then start game
+	if(!gameStarted) {
+		gameStarted = true;
+		startGame();
+	}
+	if(isLetter(event.key) && guessedLetters.indexOf(event.key) === -1) {
+		var letterArray = checkLetter(letterGuessed);
+		if(letterArray.length > 0) {
+
+		}
+		else {
+			allotedNumberOfGuesses--;
+			if(allotedNumberOfGuesses === 0) {
+				//start a new game
+				startGame();
+				//increment loss counter
+				lossCount++;
+			}
+		}
+	}
+}
+
 
     //Game Starts
 
