@@ -5,6 +5,8 @@ var gameStarted = false;
 //Define varibles for counting number of wins and number of losses
 var winCount = 0;
 var lossCount = 0;
+var guessedLetters, selectedWord, allottedNumberOfGuesses;
+var testString = "";
 function chooseWord() {
 	selectedWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 	console.log("Selected Word: " + selectedWord);
@@ -12,18 +14,16 @@ function chooseWord() {
 function generateWordSpaces() {
 	
 }
-function populateLetter(letterArray) {
+function populateLetter(letter) {
 
 }
 function startGame() {
 	//Reinitialized guessed letters array if it has something in it.
-	if(guessedLetters.length > 0) {
-		guessedLetters = [];
-	}
+	guessedLetters = [];
 	//Empty selectedWord variable
 	selectedWord = "";
 	//reset variable that keeps track of how many guesses user has made to 15
-	allotedNumberOfGuesses = 15;
+	allottedNumberOfGuesses = 15;
 	//Grab Another word from array
 	chooseWord();
 	//Generate Spaces for word
@@ -57,13 +57,13 @@ document.onkeyup = function(event) {
 		startGame();
 	}
 	if(isLetter(event.key) && guessedLetters.indexOf(event.key) === -1) {
-		var letterArray = checkLetter(letterGuessed);
+		var letterArray = checkLetter(event.key);
 		if(letterArray.length > 0) {
-
+			
 		}
 		else {
-			allotedNumberOfGuesses--;
-			if(allotedNumberOfGuesses === 0) {
+			allottedNumberOfGuesses--;
+			if(allottedNumberOfGuesses === 0) {
 				//start a new game
 				startGame();
 				//increment loss counter
@@ -71,6 +71,7 @@ document.onkeyup = function(event) {
 			}
 		}
 	}
+	console.log(testString)
 }
 
 
