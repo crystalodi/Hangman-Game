@@ -6,7 +6,6 @@ var gameStarted = false;
 var winCount = 0;
 var lossCount = 0;
 var guessedLetters, selectedWord, allottedNumberOfGuesses;
-var testString = "";
 function chooseWord() {
 	selectedWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 	console.log("Selected Word: " + selectedWord);
@@ -71,7 +70,6 @@ document.onkeyup = function(event) {
 			}
 		}
 	}
-	console.log(testString)
 }
 
 
