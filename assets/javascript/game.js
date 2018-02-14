@@ -60,14 +60,16 @@ function checkLetter(letterGuessed) {
 	for(var index = 0; index < selectedWord["word_answer"].length; index++) {
 
 	}
-	if(guessedLetters.indexOf(letterGuessed) === -1) {
+	if(checkGuessedLettersArray(letterGuessed)) {
 		guessedLetters.push(letterGuessed);
 	}
 	return isCorrectGuess;
 }
-function isLetter(letter) {
-	var code = letter.charCodeAt(0)
-	return (code >= 65 && code <= 90) || (code >= 97 && code <= 122)	
+function isLetter(code) {
+	return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);	
+}
+function checkGuessedLettersArray(letter) {
+	return guessedLetters.indexOf(letter.toLowerCase()) === -1 || letter.toUpperCase()) === -1;
 }
 document.onkeyup = function(event) {
 	//If user presses any key then start game
@@ -77,25 +79,24 @@ document.onkeyup = function(event) {
 		startGame();
 	}
 	//Define variables to store letter and key code
-	var letter;
-	var keyCode;
+	var letter = String.fromCharCode(event.which).toLowerCase();
+	var keyCode = event.which;
 	
-/* 	if(isLetter(event.key)) {
-		if(guessedLetters.indexOf(event.key) === -1) {
-			if(checkLetter(event.key)) {
-				
-			}
-			else {
-				allottedNumberOfGuesses--;
-				if(allottedNumberOfGuesses === 0) {
-					//start a new game
-					startGame();
-					//increment loss counter
-					lossCount++;
-				}
+	
+	if(isLetter(letter) && checkGuessedLettersArray(letter)) {
+		if(checkLetter(letter)) {
+			
+		}
+		else {
+			allottedNumberOfGuesses--;
+			if(allottedNumberOfGuesses === 0) {
+				//start a new game
+				startGame();
+				//increment loss counter
+				lossCount++;
 			}
 		}
-	} */
+	}
 }
 
 
