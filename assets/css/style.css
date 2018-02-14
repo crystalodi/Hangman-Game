@@ -1,8 +1,9 @@
-.letter {
+.letter-space {
 	border-bottom:5px solid black;
 	margin:5px;
-	font-size:20px;
+	font-size:14px;
 	text-align:center;
+	display: inline block;
 }
 .space {
 	margin:5px;

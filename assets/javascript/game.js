@@ -1,5 +1,5 @@
 //Define dictionary array
-var words = ["Misa Amane", "Light Yagami", "Apples", 
+var words = ["Misa", "Light", "Apples", 
  "Rem", "Ryuk", "Kira", "Watari", "Ryuzaki"];
 var gameStarted = false; 
 //Define varibles for counting number of wins and number of losses
@@ -20,7 +20,16 @@ function chooseWord() {
 	console.log("Selected Word: " + selectedWord["word"]);
 }
 function generateWordSpaces() {
-	
+	var wordDiv = document.getElementById("word");
+	var randomWord = selectedWord["word"];
+	for(var i = 0; randomWord.length; i++) {
+		var newChildDiv = document.createElement("div");
+		var id = "letter" + i;
+		newChildDiv.setAttribute("id", id);
+		newChildDiv.setAttribute("class", "letter-space");
+		newChildDiv.setAttribute("letter", randomWord[i]);
+		wordDiv.appendChild(newChildDiv);
+	}
 }
 function populateLetter(letter) {
 
@@ -38,21 +47,13 @@ function startGame() {
 	generateWordSpaces()
 }
 function checkLetter(letterGuessed) {
-	//Define empty array that will populate indexes where letter typed is found in word
-	var foundIndexArray = [];
-	//Strip out any non-alpha numeric characters
-	var sanitizedSelectedWord = selectedWord["word"].toLowerCase().replace(/[^a-zA-Z]/g, "");
-	for(var index = 0; index < sanitizedSelectedWord.length; index++) {
-		if(letterGuessed.toLowerCase() === sanitizedSelectedWord[index]) {
-			foundIndexArray.push(index);
-		}
+	for(var index = 0; index < selectedWord["word"].length; index++) {
+
 	}
 	if(guessedLetters.indexOf(letterGuessed) === -1) {
 		guessedLetters.push(letterGuessed);
 	}
-	console.log(guessedLetters);
-	console.log(foundIndexArray);
-	return foundIndexArray;
+	return true;
 }
 function isLetter(letter) {
 	var code = letter.charCodeAt(0)
@@ -68,8 +69,7 @@ document.onkeyup = function(event) {
 	
 	if(isLetter(event.key)) {
 		if(guessedLetters.indexOf(event.key) === -1) {
-			var letterArray = checkLetter(event.key);
-			if(letterArray.length > 0) {
+			if(checkLetter(event.key)) {
 				
 			}
 			else {
