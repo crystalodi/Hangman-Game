@@ -39,7 +39,7 @@ function generateWordSpaces() {
 	}
 }
 function populateLetter(letter, index) {
-
+	document.getElementById("letter" + index).innerText = letter;
 }
 function startGame() {
 	//Reinitialized guessed letters array if it has something in it.
@@ -76,6 +76,9 @@ document.onkeyup = function(event) {
 		populateDictionaryObj();
 		startGame();
 	}
+	//Define variables to store letter and key code
+	var letter;
+	var keyCode;
 	
 /* 	if(isLetter(event.key)) {
 		if(guessedLetters.indexOf(event.key) === -1) {
