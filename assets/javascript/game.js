@@ -5,8 +5,8 @@ var gameStarted = false;
 //Define varibles for counting number of wins and number of losses
 var winCount = 0;
 var lossCount = 0;
-var guessedLetters = [];
-var allottedNumberOfGuesses = 0;
+var guessedLetters;
+var allottedNumberOfGuesses;
 var selectedWord;
 var wordObjArr = [];
 function populateDictionaryObj() {
@@ -30,13 +30,11 @@ function removeWordSpaces() {
 function generateWordSpaces() {
 	var wordDiv = document.getElementById("word");
 	var randomWord = selectedWord["word_answer"];
-	alert(randomWord.length);
 	for(var i = 0; i < randomWord.length; i++) {
 		var newChildDiv = document.createElement("div");
 		var id = "letter" + i;
 		newChildDiv.setAttribute("id", id);
 		newChildDiv.setAttribute("class", "letter-space");
-		newChildDiv.setAttribute("guessed", true);
 		wordDiv.appendChild(newChildDiv);
 	}
 }
