@@ -1,14 +1,23 @@
 //Define dictionary array
-var dictionary = ["Shinigami", "Misa Amane", "Light Yagami", "Apples", 
-"Death Note", "Matsuda", "Near", "Mello", "Rem", "Gellus", "Ryuk", "Kira", "Watari"];
+var words = ["Misa Amane", "Light Yagami", "Apples", 
+ "Rem", "Ryuk", "Kira", "Watari", "Ryuzaki"];
 var gameStarted = false; 
 //Define varibles for counting number of wins and number of losses
 var winCount = 0;
 var lossCount = 0;
 var guessedLetters, selectedWord, allottedNumberOfGuesses;
+var wordObjArr = []
+function populateDictionaryObj() {
+	for(var i = 0; i < words.length;i++) {
+		var node = {}
+		node["word"] = words[i];
+		node["src"] = "./assets/img/" + i + ".jpg";
+		wordObjArr.push(node);
+	}
+}
 function chooseWord() {
 	selectedWord = dictionary[Math.floor(Math.random() * dictionary.length)];
-	console.log("Selected Word: " + selectedWord);
+	console.log("Selected Word: " + selectedWord["word"]);
 }
 function generateWordSpaces() {
 	
@@ -19,8 +28,8 @@ function populateLetter(letter) {
 function startGame() {
 	//Reinitialized guessed letters array if it has something in it.
 	guessedLetters = [];
-	//Empty selectedWord variable
-	selectedWord = "";
+	//Empty selectedWord object
+	selectedWord = {};
 	//reset variable that keeps track of how many guesses user has made to 15
 	allottedNumberOfGuesses = 15;
 	//Grab Another word from array
@@ -32,7 +41,7 @@ function checkLetter(letterGuessed) {
 	//Define empty array that will populate indexes where letter typed is found in word
 	var foundIndexArray = [];
 	//Strip out any non-alpha numeric characters
-	var sanitizedSelectedWord = selectedWord.toLowerCase().replace(/[^a-zA-Z]/g, "");
+	var sanitizedSelectedWord = selectedWord["word"].toLowerCase().replace(/[^a-zA-Z]/g, "");
 	for(var index = 0; index < sanitizedSelectedWord.length; index++) {
 		if(letterGuessed.toLowerCase() === sanitizedSelectedWord[index]) {
 			foundIndexArray.push(index);
@@ -53,6 +62,7 @@ document.onkeyup = function(event) {
 	//If user presses any key then start game
 	if(!gameStarted) {
 		gameStarted = true;
+		populateDictionaryObj();
 		startGame();
 	}
 	
