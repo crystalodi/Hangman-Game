@@ -19,6 +19,12 @@ function chooseWord() {
 	selectedWord = dictionary[Math.floor(Math.random() * dictionary.length)];
 	console.log("Selected Word: " + selectedWord["word"]);
 }
+function removeWordSpaces() {
+	var wordDiv = document.getElementById("word");
+	while (wordDiv.hasChildNodes()) {
+		wordDiv.removeChild(wordDiv.firstChild);
+	}
+}
 function generateWordSpaces() {
 	var wordDiv = document.getElementById("word");
 	var randomWord = selectedWord["word"];
@@ -31,7 +37,7 @@ function generateWordSpaces() {
 		wordDiv.appendChild(newChildDiv);
 	}
 }
-function populateLetter(letter) {
+function populateLetter(letter, index) {
 
 }
 function startGame() {
@@ -43,17 +49,20 @@ function startGame() {
 	allottedNumberOfGuesses = 15;
 	//Grab Another word from array
 	chooseWord();
+	//Clear out word spaces
+	removeWordSpaces()
 	//Generate Spaces for word
 	generateWordSpaces()
 }
 function checkLetter(letterGuessed) {
+	var isCorrectGuess = false;
 	for(var index = 0; index < selectedWord["word"].length; index++) {
 
 	}
 	if(guessedLetters.indexOf(letterGuessed) === -1) {
 		guessedLetters.push(letterGuessed);
 	}
-	return true;
+	return isCorrectGuess;
 }
 function isLetter(letter) {
 	var code = letter.charCodeAt(0)
