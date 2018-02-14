@@ -1,23 +1,25 @@
 //Define dictionary array
-var words = ["Misa", "Light", "Apples", 
- "Rem", "Ryuk", "Kira", "Watari", "Ryuzaki"];
+var words = ["misa", "light", "apples", 
+ "rem", "ryuk", "kira", "watari", "ryuzaki"];
 var gameStarted = false; 
 //Define varibles for counting number of wins and number of losses
 var winCount = 0;
 var lossCount = 0;
-var guessedLetters, selectedWord, allottedNumberOfGuesses;
-var wordObjArr = []
+var guessedLetters = [];
+var allottedNumberOfGuesses = 0;
+var selectedWord;
+var wordObjArr = [];
 function populateDictionaryObj() {
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
-		node["word"] = words[i];
+		node["word_answer"] = words[i];
 		node["src"] = "./assets/img/" + i + ".jpg";
 		wordObjArr.push(node);
 	}
 }
 function chooseWord() {
-	selectedWord = dictionary[Math.floor(Math.random() * dictionary.length)];
-	console.log("Selected Word: " + selectedWord["word"]);
+	selectedWord = wordObjArr[Math.floor(Math.random() * wordObjArr.length)];
+	console.log("Selected Word: " + selectedWord["word_answer"]);
 }
 function removeWordSpaces() {
 	var wordDiv = document.getElementById("word");
@@ -27,13 +29,14 @@ function removeWordSpaces() {
 }
 function generateWordSpaces() {
 	var wordDiv = document.getElementById("word");
-	var randomWord = selectedWord["word"];
-	for(var i = 0; randomWord.length; i++) {
+	var randomWord = selectedWord["word_answer"];
+	alert(randomWord.length);
+	for(var i = 0; i < randomWord.length; i++) {
 		var newChildDiv = document.createElement("div");
 		var id = "letter" + i;
 		newChildDiv.setAttribute("id", id);
 		newChildDiv.setAttribute("class", "letter-space");
-		newChildDiv.setAttribute("letter", randomWord[i]);
+		newChildDiv.setAttribute("guessed", true);
 		wordDiv.appendChild(newChildDiv);
 	}
 }
@@ -56,7 +59,7 @@ function startGame() {
 }
 function checkLetter(letterGuessed) {
 	var isCorrectGuess = false;
-	for(var index = 0; index < selectedWord["word"].length; index++) {
+	for(var index = 0; index < selectedWord["word_answer"].length; index++) {
 
 	}
 	if(guessedLetters.indexOf(letterGuessed) === -1) {
@@ -76,7 +79,7 @@ document.onkeyup = function(event) {
 		startGame();
 	}
 	
-	if(isLetter(event.key)) {
+/* 	if(isLetter(event.key)) {
 		if(guessedLetters.indexOf(event.key) === -1) {
 			if(checkLetter(event.key)) {
 				
@@ -91,7 +94,7 @@ document.onkeyup = function(event) {
 				}
 			}
 		}
-	}
+	} */
 }
 
 

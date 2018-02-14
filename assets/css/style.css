@@ -1,10 +1,8 @@
 .letter-space {
-	border-bottom:5px solid black;
+	border-bottom:2px solid black;
 	margin:5px;
 	font-size:14px;
 	text-align:center;
-	display: inline block;
-}
-.space {
-	margin:5px;
+	float: left;
+	width:20px;
 }
