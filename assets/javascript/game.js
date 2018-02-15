@@ -9,17 +9,18 @@ var guessedLetters;
 var allottedNumberOfGuesses;
 var selectedWord;
 var wordObjArr = [];
+var guessedCorrectlyCount;
 function populateDictionaryObj() {
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
-		node["word_answer"] = words[i];
+		node["word"] = words[i];
 		node["src"] = "./assets/img/" + i + ".jpg";
 		wordObjArr.push(node);
 	}
 }
 function chooseWord() {
 	selectedWord = wordObjArr[Math.floor(Math.random() * wordObjArr.length)];
-	console.log("Selected Word: " + selectedWord["word_answer"]);
+	console.log("Selected Word: " + selectedWord["word"]);
 }
 function removeWordSpaces() {
 	var wordDiv = document.getElementById("word");
@@ -27,9 +28,15 @@ function removeWordSpaces() {
 		wordDiv.removeChild(wordDiv.firstChild);
 	}
 }
+function removePicture() {
+	var pictureDiv = document.getElementById("picture");
+	while (pictureDiv.hasChildNodes()) {
+		pictureDiv.removeChild(pictureDiv.firstChild);
+	}
+}
 function generateWordSpaces() {
 	var wordDiv = document.getElementById("word");
-	var randomWord = selectedWord["word_answer"];
+	var randomWord = selectedWord["word"];
 	for(var i = 0; i < randomWord.length; i++) {
 		var newChildDiv = document.createElement("div");
 		var id = "letter" + i;
@@ -52,12 +59,29 @@ function startGame() {
 	chooseWord();
 	//Clear out word spaces
 	removeWordSpaces()
+	//Remove picture
+	removePicture();
 	//Generate Spaces for word
-	generateWordSpaces()
+	generateWordSpaces();
+	//set guessed correctly count to 0
+	guessedCorrectlyCount = 0;
+}
+function showPicture() {
+	var pictureDiv = document.getElementById("picture");
+	var image = document.createElement("img");
+	image.setAttribute("src", selectedWord["src"]);
+	image.setAttribute("class", "img-responsive");
+	pictureDiv.appendChild(image);
 }
 function checkLetter(letterGuessed) {
 	var isCorrectGuess = false;
-	for(var index = 0; index < selectedWord["word_answer"].length; index++) {
+	var wordLower = selectedWord["word"].toLowerCase();
+	for(var index = 0; index < wordLower.length; index++) {
+		if(letterGuessed === wordLower[index]) {
+			populateLetter(letterGuessed, index);
+			isCorrectGuess = true;
+			guessedCorrectlyCount++;
+		}
 
 	}
 	if(checkGuessedLettersArray(letterGuessed)) {
@@ -69,7 +93,7 @@ function isLetter(code) {
 	return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);	
 }
 function checkGuessedLettersArray(letter) {
-	return guessedLetters.indexOf(letter.toLowerCase()) === -1 || letter.toUpperCase()) === -1;
+	return guessedLetters.indexOf(letter) === -1 || guessedLetters.indexOf(letter.toUpperCase() === -1);
 }
 document.onkeyup = function(event) {
 	//If user presses any key then start game
@@ -81,19 +105,21 @@ document.onkeyup = function(event) {
 	//Define variables to store letter and key code
 	var letter = String.fromCharCode(event.which).toLowerCase();
 	var keyCode = event.which;
-	
-	
-	if(isLetter(letter) && checkGuessedLettersArray(letter)) {
+	if(isLetter(keyCode) && checkGuessedLettersArray(letter)) {
 		if(checkLetter(letter)) {
-			
+			if(guessedCorrectlyCount === selectedWord["word"].length) {
+				winCount++;
+				showPicture();
+				//startGame();
+			}
 		}
 		else {
 			allottedNumberOfGuesses--;
 			if(allottedNumberOfGuesses === 0) {
-				//start a new game
-				startGame();
 				//increment loss counter
 				lossCount++;
+				//start a new game
+				startGame();
 			}
 		}
 	}
