@@ -14,7 +14,7 @@ function populateDictionaryObj() {
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
 		node["word"] = words[i];
-		node["src"] = "./assets/img/" + i + ".jpg";
+		node["src"] = "./assets/img/" + words[i] + ".jpg";
 		wordObjArr.push(node);
 	}
 }
