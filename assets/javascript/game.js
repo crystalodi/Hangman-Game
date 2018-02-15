@@ -61,6 +61,10 @@ function startGame() {
 	removeWordSpaces()
 	//Remove picture
 	removePicture();
+	//Clear letters guessed , number of turns left, and number of wins/losses
+	document.getElementById("lettersGuessed").innerText = "";
+	document.getElementById("numberOfWinsLoss").innerText = "";
+	document.getElementById("numberOfGuessesRemaining").innerText = "";
 	//Generate Spaces for word
 	generateWordSpaces();
 	//set guessed correctly count to 0
@@ -86,14 +90,22 @@ function checkLetter(letterGuessed) {
 	}
 	if(checkGuessedLettersArray(letterGuessed)) {
 		guessedLetters.push(letterGuessed);
+		updateLettersGuessed();
 	}
 	return isCorrectGuess;
+}
+function updateLettersGuessed() {
+	var lettersGuessedDiv = document.getElementById("lettersGuessed");
+	lettersGuessedDiv.innerText = ""
+	for(var i = 0; i < guessedLetters.length; i++) {
+		lettersGuessedDiv.innerHTML += "&nbsp;" + guessedLetters[i];
+	}
 }
 function isLetter(code) {
 	return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);	
 }
 function checkGuessedLettersArray(letter) {
-	return guessedLetters.indexOf(letter) === -1 || guessedLetters.indexOf(letter.toUpperCase() === -1);
+	return guessedLetters.indexOf(letter) === -1 && guessedLetters.indexOf(letter.toUpperCase()) === -1;
 }
 document.onkeyup = function(event) {
 	//If user presses any key then start game
@@ -103,24 +115,34 @@ document.onkeyup = function(event) {
 		startGame();
 	}
 	//Define variables to store letter and key code
-	var letter = String.fromCharCode(event.which).toLowerCase();
-	var keyCode = event.which;
-	if(isLetter(keyCode) && checkGuessedLettersArray(letter)) {
-		if(checkLetter(letter)) {
-			if(guessedCorrectlyCount === selectedWord["word"].length) {
-				winCount++;
-				showPicture();
-				//startGame();
+	if(allottedNumberOfGuesses > 0) {
+		var letter = String.fromCharCode(event.which).toLowerCase();
+		var keyCode = event.which;
+		if(isLetter(keyCode) && checkGuessedLettersArray(letter)) {
+			if(checkLetter(letter)) {
+				if(guessedCorrectlyCount === selectedWord["word"].length) {
+					winCount++;
+					showPicture();
+					startGame();
+				}
+			}
+			else {
+				allottedNumberOfGuesses--;
+				if(allottedNumberOfGuesses === 0) {
+					//increment loss counter
+					lossCount++;
+					//start a new game
+					startGame();
+				}
 			}
 		}
-		else {
-			allottedNumberOfGuesses--;
-			if(allottedNumberOfGuesses === 0) {
-				//increment loss counter
-				lossCount++;
-				//start a new game
-				startGame();
-			}
+	}
+	else {
+		if(allottedNumberOfGuesses === 0) {
+			//increment loss counter
+			lossCount++;
+			//start a new game
+			startGame();
 		}
 	}
 }
