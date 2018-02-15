@@ -55,20 +55,25 @@ function startGame() {
 	selectedWord = {};
 	//reset variable that keeps track of how many guesses user has made to 15
 	allottedNumberOfGuesses = 15;
+	populateRemainingGuesses();
 	//Grab Another word from array
 	chooseWord();
 	//Clear out word spaces
 	removeWordSpaces()
 	//Remove picture
 	removePicture();
-	//Clear letters guessed , number of turns left, and number of wins/losses
+	//Clear letters guessed
 	document.getElementById("lettersGuessed").innerText = "";
-	document.getElementById("numberOfWinsLoss").innerText = "";
-	document.getElementById("numberOfGuessesRemaining").innerText = "";
 	//Generate Spaces for word
 	generateWordSpaces();
 	//set guessed correctly count to 0
 	guessedCorrectlyCount = 0;
+}
+function populateRemainingGuesses() {
+	document.getElementById("remainingGuessCount").innerText = allottedNumberOfGuesses;
+}
+function updateWinLoseCount() {
+	document.getElementById("numberOfWinsLoss").innerText = winCount;
 }
 function showPicture() {
 	var pictureDiv = document.getElementById("picture");
@@ -122,15 +127,18 @@ document.onkeyup = function(event) {
 			if(checkLetter(letter)) {
 				if(guessedCorrectlyCount === selectedWord["word"].length) {
 					winCount++;
+					updateWinLoseCount();
 					showPicture();
 					startGame();
 				}
 			}
 			else {
 				allottedNumberOfGuesses--;
+				populateRemainingGuesses()
 				if(allottedNumberOfGuesses === 0) {
 					//increment loss counter
 					lossCount++;
+					updateWinLoseCount();
 					//start a new game
 					startGame();
 				}
@@ -141,6 +149,7 @@ document.onkeyup = function(event) {
 		if(allottedNumberOfGuesses === 0) {
 			//increment loss counter
 			lossCount++;
+			updateWinLoseCount();
 			//start a new game
 			startGame();
 		}
