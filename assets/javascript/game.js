@@ -11,6 +11,9 @@ var selectedWord;
 var wordObjArr = [];
 var guessedCorrectlyCount;
 function populateDictionaryObj() {
+	if(wordObjArr.length > 0) {
+		wordObjArr = [];
+	}
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
 		node["word"] = words[i];
@@ -120,7 +123,7 @@ document.onkeyup = function(event) {
 		startGame();
 	}
 	//Define variables to store letter and key code
-	if(allottedNumberOfGuesses > 0) {
+	if(allottedNumberOfGuesses > 0 && gameStarted === true) {
 		var letter = String.fromCharCode(event.which).toLowerCase();
 		var keyCode = event.which;
 		if(isLetter(keyCode) && checkGuessedLettersArray(letter)) {
@@ -129,7 +132,8 @@ document.onkeyup = function(event) {
 					winCount++;
 					updateWinLoseCount();
 					showPicture();
-					startGame();
+					//startGame();
+					gameStarted = false;
 				}
 			}
 			else {
@@ -140,7 +144,8 @@ document.onkeyup = function(event) {
 					lossCount++;
 					updateWinLoseCount();
 					//start a new game
-					startGame();
+					//startGame();
+					gameStarted = false;
 					
 				}
 			}
