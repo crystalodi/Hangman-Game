@@ -71,6 +71,7 @@ function startGame() {
 	generateWordSpaces();
 	//set guessed correctly count to 0
 	guessedCorrectlyCount = 0;
+	document.getElementById("instruction").innerHTML = "Press any key to get started!"
 }
 function populateRemainingGuesses() {
 	document.getElementById("remainingGuessCount").innerText = allottedNumberOfGuesses;
@@ -134,6 +135,7 @@ document.onkeyup = function(event) {
 					showPicture();
 					//startGame();
 					gameStarted = false;
+					document.getElementById("instruction").innerHTML = "Press Any Key to Play Again"
 				}
 			}
 			else {
@@ -146,6 +148,7 @@ document.onkeyup = function(event) {
 					//start a new game
 					//startGame();
 					gameStarted = false;
+					document.getElementById("instruction").innerHTML = "Press Any Key to Play Again"
 				}
 			}
 		}
