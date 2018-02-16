@@ -146,7 +146,6 @@ document.onkeyup = function(event) {
 					//start a new game
 					//startGame();
 					gameStarted = false;
-					
 				}
 			}
 		}
