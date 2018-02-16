@@ -11,6 +11,9 @@ var selectedWord;
 var wordObjArr = [];
 var guessedCorrectlyCount;
 function populateDictionaryObj() {
+	if(wordObjArr.length > 0) {
+		wordObjArr = [];
+	}
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
 		node["word"] = words[i];
@@ -129,7 +132,7 @@ document.onkeyup = function(event) {
 					winCount++;
 					updateWinLoseCount();
 					showPicture();
-					startGame();
+					gameStarted = false;
 				}
 			}
 			else {
@@ -140,7 +143,8 @@ document.onkeyup = function(event) {
 					lossCount++;
 					updateWinLoseCount();
 					//start a new game
-					startGame();
+					gameStarted = false;
+					
 				}
 			}
 		}
@@ -151,7 +155,7 @@ document.onkeyup = function(event) {
 			lossCount++;
 			updateWinLoseCount();
 			//start a new game
-			startGame();
+			gameStarted = false;
 		}
 	}
 }
