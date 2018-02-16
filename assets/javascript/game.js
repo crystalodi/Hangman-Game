@@ -81,10 +81,10 @@ function updateWinLoseCount() {
 }
 function showPicture() {
 	var pictureDiv = document.getElementById("picture");
-	var image = document.createElement("img");
-	image.setAttribute("src", selectedWord["src"]);
-	image.setAttribute("class", "img-responsive");
-	pictureDiv.appendChild(image);
+	var wordImage = document.createElement("img");
+	wordImage.setAttribute("src", selectedWord["src"]);
+	wordImage.setAttribute("class", "img-responsive");
+	pictureDiv.appendChild(wordImage);
 }
 function checkLetter(letterGuessed) {
 	var isCorrectGuess = false;
