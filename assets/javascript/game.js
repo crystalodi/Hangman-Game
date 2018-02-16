@@ -1,6 +1,6 @@
 //Define dictionary array
 var words = ["misa", "light", "apples", 
- "rem", "ryuk", "kira", "watari", "ryuzaki"];
+ "rem", "ryuk", "kira", "watari", "ryuzaki", "chips", "weddy", "aiber", "near", "matsuda"];
 var gameStarted = false; 
 //Define varibles for counting number of wins and number of losses
 var winCount = 0;
@@ -11,9 +11,6 @@ var selectedWord;
 var wordObjArr = [];
 var guessedCorrectlyCount;
 function populateDictionaryObj() {
-	if(wordObjArr.length > 0) {
-		wordObjArr = [];
-	}
 	for(var i = 0; i < words.length;i++) {
 		var node = {}
 		node["word"] = words[i];
@@ -132,7 +129,7 @@ document.onkeyup = function(event) {
 					winCount++;
 					updateWinLoseCount();
 					showPicture();
-					gameStarted = false;
+					startGame();
 				}
 			}
 			else {
@@ -143,19 +140,10 @@ document.onkeyup = function(event) {
 					lossCount++;
 					updateWinLoseCount();
 					//start a new game
-					gameStarted = false;
+					startGame();
 					
 				}
 			}
-		}
-	}
-	else {
-		if(allottedNumberOfGuesses === 0) {
-			//increment loss counter
-			lossCount++;
-			updateWinLoseCount();
-			//start a new game
-			gameStarted = false;
 		}
 	}
 }
