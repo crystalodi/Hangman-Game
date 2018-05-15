@@ -71,6 +71,7 @@ function startGame() {
 	generateWordSpaces();
 	//set guessed correctly count to 0
 	guessedCorrectlyCount = 0;
+	document.getElementById("instruction").innerHTML = "Press any key to get started!"
 }
 function populateRemainingGuesses() {
 	document.getElementById("remainingGuessCount").innerText = allottedNumberOfGuesses;
@@ -80,10 +81,10 @@ function updateWinLoseCount() {
 }
 function showPicture() {
 	var pictureDiv = document.getElementById("picture");
-	var image = document.createElement("img");
-	image.setAttribute("src", selectedWord["src"]);
-	image.setAttribute("class", "img-responsive");
-	pictureDiv.appendChild(image);
+	var wordImage = document.createElement("img");
+	wordImage.setAttribute("src", selectedWord["src"]);
+	wordImage.setAttribute("class", "img-responsive");
+	pictureDiv.appendChild(wordImage);
 }
 function checkLetter(letterGuessed) {
 	var isCorrectGuess = false;
@@ -134,6 +135,7 @@ document.onkeyup = function(event) {
 					showPicture();
 					//startGame();
 					gameStarted = false;
+					document.getElementById("instruction").innerHTML = "Press Any Key to Play Again"
 				}
 			}
 			else {
@@ -146,6 +148,7 @@ document.onkeyup = function(event) {
 					//start a new game
 					//startGame();
 					gameStarted = false;
+					document.getElementById("instruction").innerHTML = "Press Any Key to Play Again"
 				}
 			}
 		}
