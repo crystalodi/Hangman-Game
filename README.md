@@ -1,6 +1,75 @@
 # Death Note Hangman Game
 
-This hangman game will allow users to guess the names, items, and concepts associated with the popular anime series Death Note. 
+This hangman game will allow users to guess the names, items, and concepts associated with the popular anime series Death Note.
+
+## Live Version
+
+Go [here](http://crystalodi.github.io/Hangman-Game/) to view the app. 
+
+## About the Application
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+Install the following programs if they aren't on your local machine.
+
+GIT - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+### Installing
+
+Open your terminal and clone [this](http://github.com/Hangman-Game/Hangman-Game.git) repository to your computer. 
+
+```
+git clone http://github.com/Hangman-Game/Hangman-Game.git
+
+```
+
+Navigate to the `/Hangman-Game` directory with your terminal
+
+```
+cd Hangman-Game
+```
+
+Open file explorer from the `/Hangman-Game` directory
+
+```
+explorer .
+```
+
+Open the `index.html` file by double clicking on it. The app will open in a web browser and should look like this:
+
+![Home](./assets/img/home.png)
+
+### Folder Structure
+After following the instructions in the installation section, the contents of the `/Hangman-Game` will look like this
+
+```
+│   index.html
+│   README.md
+│
+└───assets
+    ├───css
+    │       reset.css
+    │       style.css
+    │
+    ├───img
+    └───javascript
+            game.js
+```
+* `assets/css/reset.css` removes any default styling applied by web browsers
+* `assets/css/style.css` Adds styling for letter spaces in game area. Adds bottom border so it looks like a blank.
+* `assets/img` contains images associated with each word, which will display if user guesses the correct letters in less than alloted number of guesses.
+* `assets/javascript/game.js` Contains logic to start the game.
+    * When a key press is detected from `index.html`, game.js will pick a random word from an array of words and populate a space for each letter in the word in the game area container.
+
+    * If key pressed is a letter and it's in the random word selected, that letter is populated in the Letters Already guessed section and populated in the space(s) for letters in game area.
+
+    * If key pressed is a letter and it's not in the selected word, then letter is populated in the Letters Already guessed section and the number of guesses alloted is decreased by one.
+
+* `index.html` Contains Social media sidebar and a section for adding autobiographal and professional details. Also contains navbar and header with name at top to navigate to other pages.
 
 ## How to Play
 
@@ -28,26 +97,23 @@ If the user is able to guess the word before the number of allotted guesses is z
 
 
 If the user is not able to guess the word before the number of alloted guesses is zero, then no picture will display, and the user will be able to press any key to start another round.
-![Win](./assets/img/loss.png)
+![Lost, start over](./assets/img/loss.png)
 
 
-## Code
-Each word is stored in an array of objects containing the word and image associated with the word. Each time the user presses a key to start a new round, a random integer between 0 and the length of the array - 1 and is used to select the word from the array.
-<!-- Add screenshot or code snippet--->
+## Built With
 
-For each key press that is a letter that hasn't been guessed already and the number of guesses left is greater than 0, a for loop iterates through the selected word to check if the letter is in the word. Case does not matter.
-<!-- Add screenshot of code snippet--->
+* HTML
+* JavaScript
+* Bootstrap CSS
 
-Every letter guessed is added to an array and iterated over to display in the "Guessed Letters" section.
-<!-- Add screenshot of code snippet--->
+## Authors
 
-When there are no guesses left, the  url of the image populated for each word in the array of objects will be used to display a picture next to the game area.
-<!-- Add screenshot of code snippet--->
+* **Crystal Odi** - *Initial work* - [crystalodi](https://github.com/crystalodi)
 
-## Technologies Used
-* Javascript
-* HTML5
-* CSS
+
+## Acknowledgments
+
+* [Death Note Wiki](http://deathnote.wikia.com/wiki/Main_Page) - for images.
 
 
 
