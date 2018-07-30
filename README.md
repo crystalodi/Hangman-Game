@@ -1,25 +1,34 @@
 # Death Note Hangman Game
 
-## About
 This hangman game will allow users to guess the names, items, and concepts associated with the popular anime series Death Note. 
 
-## How to use
-To Start the game, press the any key. Blank spaces for the characters in the selected word will appear in the center of the screen. Users will have 15 tries to guess the word correctly using a keyboard. Non letter characters do not count against the number of guesses allotted.
+## How to Play
 
-Each letter guessed will be displayed under the "Letters Already Guessed" panel.
-<!--Add screenshot here-->
+### Rules
 
-If the user guesses a letter that's in the chosen word, the letter will appear in the space(s) in the "Game Area" panel.
-<!--Add screenshot here--> 
+1. Users will have 15 tries to guess the word correctly using their keyboard
+2. Non Letter Characters do not count towards the number of guesses alloted.
+3. You can't guess the same letter more than once.
+4. Alloted number of guesses decrements by one if the letter guessed is not in the selected word.
 
-If the user guesses a letter incorrectly, then the number of guesses will be decremented by one and displayed to the user in the "Number of Guesses" panel.
-<!--add screenshot here-->
+To Start the game, press any key on your keyboard. Blank spaces for the characters in the selected word will appear in the center of the screen. 
+![Start Game](./assets/img/game_started.png)
+
+
+If the user guesses a letter that's in the chosen word, the letter will appear in the space(s) in the "Game Area" panel. Each letter guessed will be displayed under the "Letters Already Guessed" panel.
+![Correct Guess](./assets/img/guess_correct.png)
+
+
+For each wrong guess, then the number of guesses will be decremented by one and displayed to the user in the "Number of Guesses" panel.
+![Wrong Guesses Less Guesses](./assets/img/wrong_guess_decrement.png)
+
 
 If the user is able to guess the word before the number of allotted guesses is zero, then a picture describing the word will display right next to the "Game Area" section. The number in the "Wins" panel will be incremented and the user will be able to press any key to start another round where a new word will be chosen.
-<!--Add screenshot here-->
+![Win](./assets/img/win.png)
+
 
 If the user is not able to guess the word before the number of alloted guesses is zero, then no picture will display, and the user will be able to press any key to start another round.
-<!--Add screenshot here-->
+![Win](./assets/img/loss.png)
 
 
 ## Code
